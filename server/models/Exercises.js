@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 
-const excerciseSchema = new Schema (
+const exerciseSchema = new Schema (
     {
         exerciseTypes: 
         {
@@ -31,7 +31,7 @@ const excerciseSchema = new Schema (
 
 )
 
-const Exercises = model('Exercises', excerciseSchema);
+const Exercises = model('Exercises', exerciseSchema);
 
 
 

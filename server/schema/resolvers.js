@@ -3,7 +3,7 @@ const {User, Exercises} = require('../models')
 const resolvers = {
 
     Query: {
-        users: async () => {
+        user: async () => {
             return User.find()
               .select('-__v -password')
               

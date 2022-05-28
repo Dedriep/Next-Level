@@ -6,8 +6,12 @@ type User {
     _id: ID
     username: String
     email: String
-    exercises: [exercises]
     
+  }
+
+  type Query {
+    users: [User]
+    user(username: String!): Usergit
   }
 
 
