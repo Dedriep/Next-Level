@@ -22,7 +22,14 @@ const userSchema = new Schema (
         type: String,
         minlength: 9
         
-    }
+    },
+
+    exercises: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Exercises'
+          }
+    ]
 },
 
 {
