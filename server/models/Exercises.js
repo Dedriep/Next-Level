@@ -22,11 +22,6 @@ const exerciseSchema = new Schema (
             min: 1
         },
 
-        time: {
-            type:Number,
-            
-        }
-
     }
 
 )

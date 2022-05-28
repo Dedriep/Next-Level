@@ -9,9 +9,20 @@ type User {
     
   }
 
+  type Exercises {
+    _id: ID
+
+  }
+
+
   type Query {
+    
+    user(username: String!): User
+
+
+
     users: [User]
-    user(username: String!): Usergit
+    exercises: [Exercises]
   }
 
 
