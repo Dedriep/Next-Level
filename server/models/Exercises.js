@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const { number } = require('prop-types');
 
 
 const excerciseSchema = new Schema (
@@ -13,18 +12,19 @@ const excerciseSchema = new Schema (
         },
 
         reps: {
-            type: number,
+            type: Number,
             min: 1
 
         },
 
         sets: {
-            type: number,
+            type: Number,
             min: 1
         },
 
         time: {
-            type:number,
+            type:Number,
+            
         }
 
     }
