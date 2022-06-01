@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought } = require('../models');
+const { User, Exercises } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -25,12 +25,12 @@ const resolvers = {
             return User.findOne({ username })
               .select('-__v -password')
             },
-            thoughts: async (parent, { username }) => {
+            Exercisess: async (parent, { username }) => {
               const params = username ? { username } : {};
-              return Thought.find(params).sort({ createdAt: -1 });
+              return Exercises.find(params).sort({ createdAt: -1 });
             },
-            thought: async (parent, { _id }) => {
-              return Thought.findOne({ _id });
+            Exercises: async (parent, { _id }) => {
+              return Exercises.findOne({ _id });
             }
           },
           Mutation: {
@@ -56,29 +56,29 @@ const resolvers = {
               const token = signToken(user);
               return { token, user };
             },
-            addThought: async (parent, args, context) => {
+            addExercises: async (parent, args, context) => {
               if (context.user) {
-                const thought = await Thought.create({ ...args, username: context.user.username });
+                const Exercises = await Exercises.create({ ...args, username: context.user.username });
         
                 await User.findByIdAndUpdate(
                   { _id: context.user._id },
-                  { $push: { thoughts: thought._id } },
+                  { $push: { Exercisess: Exercises._id } },
                   { new: true }
                 );
-                return thought;
+                return Exercises;
               }
         
               throw new AuthenticationError('You need to be logged in!');
             },
-            addReaction: async (parent, { thoughtId, reactionBody }, context) => {
+            addReaction: async (parent, { ExercisesId, reactionBody }, context) => {
               if (context.user) {
-                const updatedThought = await Thought.findOneAndUpdate(
-                  { _id: thoughtId },
+                const updatedExercises = await Exercises.findOneAndUpdate(
+                  { _id: ExercisesId },
                   { $push: { reactions: { reactionBody, username: context.user.username } } },
                   { new: true, runValidators: true }
                 );
         
-                return updatedThought;
+                return updatedExercises;
               }
         
               throw new AuthenticationError('You need to be logged in!');
