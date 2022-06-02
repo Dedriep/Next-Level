@@ -5,6 +5,7 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
+    exercises: [Exercises]
   }
 
   type Exercises {
@@ -20,6 +21,10 @@ const typeDefs = gql`
   type Auth {
     token: ID!
     user: User
+  }
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    exercises: [String]
   }
 `;
 module.exports = typeDefs;
