@@ -11,6 +11,9 @@ type User {
 
   type Exercises {
     _id: ID
+    exerciseTypes: String
+    reps: Int
+    sets: Int
 
   }
 
@@ -18,9 +21,6 @@ type User {
   type Query {
     
     user(username: String!): User
-
-
-
     users: [User]
     exercises: [Exercises]
   }
