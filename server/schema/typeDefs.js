@@ -23,7 +23,7 @@ type User {
   }
 
   type Query {
-    me: User
+    LoggedInUser: User
     users: [User]
     user(username: String!): User
     exercises (_id: ID!): Exercises
