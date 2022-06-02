@@ -24,8 +24,8 @@ db.once("open", async () => {
 
   const createdUsers = await User.collection.insertMany(userData);
 
-  // create Exercises
-  let createdExercises = [];
+  // create Exercisess
+  let createdExercisess = [];
   for (let i = 0; i < 100; i += 1) {
     const ExercisesText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 

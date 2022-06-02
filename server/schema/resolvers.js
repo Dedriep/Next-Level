@@ -1,101 +1,70 @@
-const { AuthenticationError } = require("apollo-server-express");
-const { User, Exercises } = require("../models");
-const { signToken } = require("../utils/auth");
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Exercises } = require('../models');
+const { signToken } = require('../auth');
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select();
-        if (!userData) {
-          throw new Error("User was not found");
-        }
-        return userData;
+        const currentUser = await User.findOne({ _id: context.user._id })
+
+          .select('-__v -password')
+
+        return currentUser
       }
 
-      throw new AuthenticationError("Not logged in");
+      throw new AuthenticationError('You are not logged in');
     },
     users: async () => {
-      return User.find().select("-__v -password");
-    },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).select("-__v -password");
-    },
-
-    Exercises: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Exercises.find(params).sort({ createdAt: -1 });
-    },
-    Exercises: async (parent, { _id }) => {
-      return Exercises.findOne({ _id });
-    },
+      return User.find()
+        .select('-__v -password')
+        .populate('exercises')
+    }
   },
+
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
-      const token = signToken(user);
+      const token = signToken(user)
 
-      return { token, user };
+      return { token, user }
     },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError("Incorrect credentials");
+        throw new AuthenticationError('Username Incorrect!');
+      }
+      const rightPassword = await user.isCorrectPassword(password);
+
+      if (!rightPassword) {
+        throw new AuthenticationError('Your password is incorrect!');
       }
 
-      const correctPw = await user.isCorrectPassword(password);
       const token = signToken(user);
       return { token, user };
     },
-    addExercises: async (parent, args, context) => {
+
+    addWorkout: async (parent, args, context) => {
       if (context.user) {
-        const Exercises = await Exercises.create({
-          ...args,
-          username: context.user.username,
-        });
+        const exercises = await Exercises.create({ ...args, username: context.user.username });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { Exercises: Exercises._id } },
+          { $push: { exercises: exercises._id } },
           { new: true }
         );
-        return Exercises;
+
+        return exercises;
       }
 
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError('You are not logged in, please login!');
     },
-    addReaction: async (parent, { ExercisesId, reactionBody }, context) => {
-      if (context.user) {
-        const updatedExercises = await Exercises.findOneAndUpdate(
-          { _id: ExercisesId },
-          {
-            $push: {
-              reactions: { reactionBody, username: context.user.username },
-            },
-          },
-          { new: true, runValidators: true }
-        );
 
-        return updatedExercises;
-      }
-
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    addFriend: async (parent, { friendId }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { friends: friendId } },
-          { new: true }
-        ).populate("friends");
-
-        return updatedUser;
-      }
-
-      throw new AuthenticationError("You need to be logged in!");
-    },
-  },
+  }
 };
 
 module.exports = resolvers;
+
+

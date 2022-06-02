@@ -10,21 +10,32 @@ const typeDefs = gql`
 
   type Exercises {
     _id: ID
-  }
-
-  type Query {
-    user(username: String!): User
-    users: [User]
-    exercises: [Exercises]
+    exerciseTypes: String
+    reps: Int
+    sets: Int
   }
 
   type Auth {
     token: ID!
     user: User
   }
+
+  type Query {
+    me: User
+    users: [User]
+    user(username: String!): User
+    exercises(_id: ID!): Exercises
+  }
+
   type Mutation {
+    addUser(email: String!, username: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    exercises: [String]
+    addWorkout(
+      userId: ID!
+      exerciseTypes: String!
+      reps: Int!
+      sets: Int!
+    ): Exercises
   }
 `;
 module.exports = typeDefs;
