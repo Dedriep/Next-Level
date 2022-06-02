@@ -61,24 +61,6 @@ db.once("open", async () => {
     createdExercisess.push(createdExercises);
   }
 
-  // create reactions
-  for (let i = 0; i < 100; i += 1) {
-    const reactionBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
-
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { username } = createdUsers.ops[randomUserIndex];
-
-    const randomExercisesIndex = Math.floor(
-      Math.random() * createdExercisess.length
-    );
-    const { _id: ExercisesId } = createdExercisess[randomExercisesIndex];
-
-    await Exercises.updateOne(
-      { _id: ExercisesId },
-      { $push: { reactions: { reactionBody, username } } },
-      { runValidators: true }
-    );
-  }
 
   console.log("all done!");
   process.exit(0);

@@ -4,15 +4,15 @@ const exerciseSchema = new Schema({
   exerciseTypes: {
     type: String,
     required: true,
-    enum: [
-      "Pushups",
-      "Situps",
-      "Plank",
-      "Squat",
-      "Lunge",
-      "Pullups",
-      "Jumprope",
-    ],
+    // enum: [
+    //   "Pushups",
+    //   "Situps",
+    //   "Plank",
+    //   "Squat",
+    //   "Lunge",
+    //   "Pullups",
+    //   "Jumprope",
+    // ],
   },
 
   reps: {
