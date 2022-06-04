@@ -18,6 +18,11 @@ const resolvers = {
       return User.find()
         .select('-__v -password')
         .populate('exercises')
+    },
+
+    exercises: async (parent,{username}) => {
+      const params = username ? { username } : {};
+      return Exercises.find(params)
     }
   },
 
