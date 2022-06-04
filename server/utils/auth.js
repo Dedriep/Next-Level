@@ -1,34 +1,35 @@
-const jwt = require("jsonwebtoken");
+// const secretpw = require('dotenv')
 
-const secret = "Team7iscool";
-const expiration = "4h";
+const jwt = require('jsonwebtoken');
+const secret = "password123"
+const expiration = '1h'
 
 module.exports = {
-  authMiddleware: function ({ req }) {
-    // allows token to be sent via req.body, req.query, or headers
-    let token = req.body.token || req.query.token || req.headers.authorization;
+    authMiddleware: function({ req }) {
+      let token = req.headers.authorization || req.body.token || req.query.token
+  
+      if (req.headers.authorization) {
+        token = token
+      
 
-    // ["Bearer", "<tokenvalue>"]
-    if (req.headers.authorization) {
-      token = token.split(" ").pop().trim();
-    }
+      }
+  
+      if (!token) {
+        return req;}
+  
+      try {
+        const { data } = jwt.verify(token, secret, { maxAge: expiration });
+        req.user = data;
+      } catch {
+        console.log('Wrong token!');
+      }
 
-    if (!token) {
       return req;
+    },
+
+    signToken: function({ _id, username, email, }) {
+      const payload = {  _id, username, email, };
+  
+      return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
     }
-
-    try {
-      const { data } = jwt.verify(token, secret, { maxAge: expiration });
-      req.user = data;
-    } catch {
-      console.log("Invalid token");
-    }
-
-    return req;
-  },
-  signToken: function ({ username, email, _id }) {
-    const payload = { username, email, _id };
-
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-  },
-};
+  }
