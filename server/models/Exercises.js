@@ -1,19 +1,13 @@
 const { Schema, model } = require("mongoose");
 
 const exerciseSchema = new Schema({
-  exerciseTypes: {
+  exerciseTypes: [
+    {
     type: String,
     required: true,
-    // enum: [
-    //   "Pushups",
-    //   "Situps",
-    //   "Plank",
-    //   "Squat",
-    //   "Lunge",
-    //   "Pullups",
-    //   "Jumprope",
-    // ],
-  },
+    min: 2,
+    max: 30
+  }],
 
   reps: {
     type: Number,
@@ -25,6 +19,9 @@ const exerciseSchema = new Schema({
     min: 1,
   },
 });
+
+
+
 
 const Exercises = model("Exercises", exerciseSchema);
 

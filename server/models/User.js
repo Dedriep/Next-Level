@@ -24,6 +24,12 @@ const userSchema = new Schema (
         
     },
 
+    tracker: {
+        required: true,
+        default: 1,
+        type: Number,
+    },
+
     exercises: [
         {
             type: Schema.Types.ObjectId,

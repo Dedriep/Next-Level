@@ -10,8 +10,9 @@ module.exports = {
   
       if (req.headers.authorization) {
         token = token
-      
-
+        .split(' ')
+        .pop()
+        .trim()
       }
   
       if (!token) {

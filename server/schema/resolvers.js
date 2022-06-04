@@ -7,7 +7,6 @@ const resolvers = {
     LoggedInUser: async (parent, args, context) => {
       if (context.user) {
         const currentUser = await User.findOne({ _id: context.user._id })
-
           .select('-__v -password')
 
         return currentUser
@@ -41,14 +40,18 @@ const resolvers = {
       if (!rightPassword) {
         throw new AuthenticationError('Your password is incorrect!');
       }
-
+      await User.findByIdAndUpdate(
+        { _id: user._id },
+        { tracker: user.tracker +1},
+        { new: true }
+      )
       const token = signToken(user);
       return { token, user };
     },
 
     addWorkout: async (parent, args, context) => {
       if (context.user) {
-        const exercises = await Exercises.create({ ...args, username: context.user.username });
+        const exercises = await Exercises.create( args);
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },

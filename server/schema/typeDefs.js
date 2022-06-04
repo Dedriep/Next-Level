@@ -6,12 +6,13 @@ type User {
     _id: ID
     username: String
     email: String
+    tracker: Int
     
   }
 
   type Exercises {
     _id: ID
-    exerciseTypes: String
+    exerciseTypes: [String]
     reps: Int
     sets: Int
 
@@ -39,9 +40,9 @@ type User {
   }
 
   type Mutation {
-    addUser(email: String!, username: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-    addWorkout (userId: ID!, exerciseTypes: String!, reps: Int!, sets: Int!): Exercises
+    addUser(email: String!, username: String!, password: String!):Auth
+    login(email: String!, password: String!):Auth
+    addWorkout(exerciseTypes: [String!], reps: Int!, sets: Int!):Exercises
 
   }
 
