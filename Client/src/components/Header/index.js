@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-// import auth below to check if user is logged in or not, to conditionally render header elements
-//import Auth from '../../utils/auth';
+import AuthService from '../../utils/auth';
 
 
-const Header =() =>{
+function Header() {
     return (
 <Header>
    <div>
@@ -24,7 +23,7 @@ const Header =() =>{
        </nav>
    </div>
 </Header>
-    )
+    );
 }
 
-export default Header
+export default Header;

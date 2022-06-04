@@ -33,8 +33,8 @@ const Dashboard = () => {
                 <Workouts />
             </div>
         </main>
-    )
+    );
 
-}
+};
 
 export default Dashboard
