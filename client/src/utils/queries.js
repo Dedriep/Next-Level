@@ -12,3 +12,14 @@ query LoggedInUser {
     }
   }
 `
+export const QUERY_WORKOUTS = gql `
+
+query Exercises($id: ID!) {
+    exercises(_id: $id) {
+      exerciseTypes
+      reps
+      sets
+    }
+  }
+
+`
