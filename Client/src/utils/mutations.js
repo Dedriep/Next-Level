@@ -31,3 +31,14 @@ export const ADD_USER = gql`
     }
   }
 `;
+export const ADD_WORKOUT = gql`
+mutation addWorkout($sets: Int!, $reps: Int!, $exerciseTypes: [String!]) {
+  addWorkout(sets: $sets, reps: $reps, exerciseTypes: $exerciseTypes) {
+    exerciseTypes
+    reps
+    sets
+    _id
+  }
+}
+
+`
