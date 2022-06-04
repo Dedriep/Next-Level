@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+// import { useMutation } from '@apollo/client';
+// import { LOGIN } from '../utils/mutations';
 
-const Signup = () => {
-  const [formState, setFormState] = useState({ username: '', email: '', password: '' });
+const Login = (props) => {
+  const [formState, setFormState] = useState({ email: '', password: '' });
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -14,26 +16,24 @@ const Signup = () => {
   };
 
   // submit form
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit =  (event) => {
     event.preventDefault();
+
+    // clear form values
+    /* setFormState({
+      email: '',
+      password: '',
+    }); */
+
   };
 
   return (
     <main className='flex-row justify-center mb-4'>
       <div className='col-12 col-md-6'>
         <div className='card'>
-          <h4 className='card-header'>Sign Up</h4>
+          <h4 className='card-header'>Login</h4>
           <div className='card-body'>
             <form onSubmit={handleFormSubmit}>
-              <input
-                className='form-input'
-                placeholder='Your username'
-                name='username'
-                type='username'
-                id='username'
-                value={formState.username}
-                onChange={handleChange}
-              />
               <input
                 className='form-input'
                 placeholder='Your email'
@@ -63,4 +63,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
