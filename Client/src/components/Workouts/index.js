@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Workout = ({exercises})=> {
+const Workouts = ({exercises})=> {
 
-    if (!exercises.length){
+    if (!exercises){
         return <p> What are you waiting for, let's get started!</p>
     }
 
@@ -11,7 +11,7 @@ const Workout = ({exercises})=> {
         <h2>WORKOUT LOG</h2>
         {exercises && 
         exercises.map(exercises => (
-            <div> 
+            <div key={exercises._id} style={{border: "solid blue 3px"}}> 
             <p>{exercises.exerciseTypes}</p>
                 <p>{exercises.sets}</p>
                 <p>{exercises.reps}</p>
@@ -25,4 +25,4 @@ const Workout = ({exercises})=> {
 }
 
 
-export default Workout
+export default Workouts

@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
-import { QUERY_LOGGEDIN } from '../utils/queries';
-import Workouts from '../components/Workouts'
+import { QUERY_ME } from '../utils/queries';
+import Workouts from '../components/Workouts';
+import WorkoutForm from '../components/WorkoutForm';
 
 //authentication to check if user is logged in
 //import Auth from '../utils/auth';
@@ -14,7 +15,9 @@ import Workouts from '../components/Workouts'
 
 
 const Dashboard = () => {
-    const { loading, data } = useQuery(QUERY_LOGGEDIN);
+    const { data, loading } = useQuery(QUERY_ME);
+    const exercises = data?.me.exercises;
+    const userId = data?.me._id;
 
     return (
         <main>
@@ -23,15 +26,15 @@ const Dashboard = () => {
             </div>
             <div>
                 <p>Be sure to log your progress.</p>
-            {/* </div>
+            </div>
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <Workouts exercises={exercises} />
+                <>
+                    <Workouts exercises={exercises} />
+                    <WorkoutForm userId={userId}/>
+                </>
             )}
-            <div> */}
-                <Workouts />
-            </div>
         </main>
     );
 

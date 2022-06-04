@@ -6,16 +6,15 @@ const expiration = '1h'
 
 module.exports = {
     authMiddleware: function({ req }) {
-      let token = req.headers.authorization || req.body.token || req.query.token
+      let token = req.body.token || req.query.token || req.headers.authorization
   
       if (req.headers.authorization) {
-        token = token
-      
-
+        token = token.split(" ").pop().trim();
       }
   
       if (!token) {
-        return req;}
+        return req;
+      }
   
       try {
         const { data } = jwt.verify(token, secret, { maxAge: expiration });

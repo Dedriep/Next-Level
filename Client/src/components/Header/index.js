@@ -1,29 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import AuthService from '../../utils/auth';
+import Auth from "../../utils/auth";
 
+const Header = () => {
+  return (
+    <>
+      <div>
+            <Link to="/" >
+                <p>NEXT-LEVEL</p>
+            </Link>
+        </div>
+        <div>
+            <nav>
+            <Link to="/login" >
+                <p>Login</p>
+            </Link>
 
-function Header() {
-    return (
-<Header>
-   <div>
-      <Link to="/" >
-          <p> NEXT-LEVEL</p>
-      </Link>
-   </div>
-   <div>
-       <nav>
-       <Link to="/Dashboard" >
-          <p> My Profile</p>
-      </Link>
+            <Link to="/signup" >
+                <p>Sign Up</p>
+            </Link>
 
-      <Link to="/Dashboard" >
-          <p> My Profile</p>
-      </Link>
-       </nav>
-   </div>
-</Header>
-    );
-}
+            <a href='/' onClick={() => Auth.logout()}>
+              Logout
+            </a>
+            </nav>
+        </div>
+    </>
+  )
+};
 
 export default Header;

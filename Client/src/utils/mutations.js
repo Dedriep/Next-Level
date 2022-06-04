@@ -32,13 +32,11 @@ export const ADD_USER = gql`
   }
 `;
 export const ADD_WORKOUT = gql`
-mutation addWorkout($sets: Int!, $reps: Int!, $exerciseTypes: [String!]) {
-  addWorkout(sets: $sets, reps: $reps, exerciseTypes: $exerciseTypes) {
+mutation Mutation($userId: ID!, $exerciseTypes: String!, $reps: Int!, $sets: Int!) {
+  addWorkout(userId: $userId, exerciseTypes: $exerciseTypes, reps: $reps, sets: $sets) {
+    _id
     exerciseTypes
     reps
     sets
-    _id
   }
-}
-
-`
+}`

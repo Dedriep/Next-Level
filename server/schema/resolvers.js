@@ -6,9 +6,8 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const currentUser = await User.findOne({ _id: context.user._id })
-
-          .select('-__v -password')
+        const currentUser = await User.findById({ _id: context.user._id })
+          .populate("exercises");
 
         return currentUser
       }
@@ -19,6 +18,16 @@ const resolvers = {
       return User.find()
         .select('-__v -password')
         .populate('exercises')
+    },
+    exercises: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: "exercises"
+        });
+        return user.exercises;
+      }
+
+      throw new AuthenticationError("Not Logged In")
     }
   },
 
@@ -47,8 +56,11 @@ const resolvers = {
     },
 
     addWorkout: async (parent, args, context) => {
+      console.log("test");
       if (context.user) {
-        const exercises = await Exercises.create({ ...args, username: context.user.username });
+        const exercises = await Exercises.create({ ...args, userId: context.user._id });
+
+        console.log(exercises);
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
