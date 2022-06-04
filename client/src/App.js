@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard'
 import Login from './Pages/Dashboard'
 import Homepage from './Pages/Homepage'
+import Header from './components/Header'
 
 
 const httpLink = createHttpLink({
@@ -20,6 +21,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <Header />
         <div>
           <Routes>
             <Route
@@ -34,10 +36,10 @@ function App() {
               path="/login"
               element={<Login />}
             />
-            <Route
+            {/* <Route
               path="*"
               element={<NoMatch />}
-            />
+            /> */}
           </Routes>
         </div>
 

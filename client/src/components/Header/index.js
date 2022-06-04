@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+// import auth below to check if user is logged in or not, to conditionally render header elements
+//import Auth from '../../utils/auth';
 
 
 const Header =() =>{
