@@ -7,5 +7,23 @@
     "faker": "^5.5.3",
     "graphql": "^16.5.0",
     "mongoose": "^6.3.4"
-  }
+  },
+  "name": "next-level",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CougarChan/Next-Level.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CougarChan/Next-Level/issues"
+  },
+  "homepage": "https://github.com/CougarChan/Next-Level#readme"
 }
