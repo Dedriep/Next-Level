@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DashBoard from './DashBoard'
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -14,14 +15,17 @@ const Login = (props) => {
   };
 
   // submit form
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit =  (event) => {
     event.preventDefault();
 
     // clear form values
-    setFormState({
+    /* setFormState({
       email: '',
       password: '',
-    });
+    }); */
+
+    return <DashBoard/>
+
   };
 
   return (
