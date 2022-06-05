@@ -7,6 +7,7 @@ query me {
       _id
       username
       email
+      tracker
       exercises {
         _id
         exerciseTypes

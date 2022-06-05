@@ -32,22 +32,39 @@ const WorkoutForm = ({ userId }) => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Add a Workout</h1>
-            <div>
+            <div className="row">
+                <div className="col s12">
+                <div className="row">
+
+                
+                <div className= "input-field col s6">
                 <label>Exercise Type: </label>
-                <input type="text" value={workType} onChange={(e) => setWorkType(e.target.value)}/>
+                <input type="text" className="validate" placeholder="Enter Exercise Type" value={workType} onChange={(e) => setWorkType(e.target.value)}/>
+                </div>
+
+                <div className= "input-field col s6">
                 <label> Sets: </label>
-                <input type="number" value={sets} onChange={(e) => setSets(e.target.value)}/>
+                <input type="number" className="validate" placeholder="Enter the number of sets" value={sets} onChange={(e) => setSets(e.target.value)}/>
+                </div>
+
+                <div className= "input-field col s6">
+
                 <label> Reps: </label>
-                <input type="number" value={reps} onChange={(e) => setReps(e.target.value)}/>
+                <input type="number" className="validate" placeholder="Enter the number of reps " value={reps} onChange={(e) => setReps(e.target.value)}/>
                 <br />
-                <button onClick={() => handleButtonClick()}>Add Workout</button>
+                </div>
+
+                <button className="waves-effect waves-light btn" onClick={() => handleButtonClick()}>Add Workout</button>
+                </div>
+                </div>
             </div>
         </div>
     )
 
 }
+
 
 
 export default WorkoutForm
