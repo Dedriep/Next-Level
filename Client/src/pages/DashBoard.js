@@ -22,7 +22,7 @@ const Dashboard = () => {
     return (
         <main>
             <div>
-                <p>Congratulations on your progress. You have X Points!</p>
+                {/* <p>Congratulations on your progress. You have X Points!</p> */}
             </div>
             <div>
                 <p>Be sure to log your progress.</p>

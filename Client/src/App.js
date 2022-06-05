@@ -7,6 +7,8 @@ import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "../src/pages/Signup";
+import 'materialize-css/dist/css/materialize.min.css';
+
 
  // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -38,6 +40,7 @@ function App() {
       <Router>
       <>
         <Header /> 
+        
         <Routes>   
           <Route path="/" element={<Dashboard />} />
           <Route path="/signup" element={<Signup />} />
@@ -46,8 +49,12 @@ function App() {
         <Footer /> 
       </>
       </Router>
+      
     </ApolloProvider>
+    
   );
 }
+
+
 
 export default App;
